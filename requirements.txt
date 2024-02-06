@@ -3,4 +3,4 @@ pandas
 scikit-learn
 xgboost
 dill
--e .
+#-e .
