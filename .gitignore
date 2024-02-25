@@ -150,7 +150,7 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 dataset/
-artifacts/data.csv
+/artifacts/data.csv
 
 # Cython debug symbols
 cython_debug/
@@ -164,3 +164,4 @@ cython_debug/
 
 # Datasets
 dataset/
+data.csv
