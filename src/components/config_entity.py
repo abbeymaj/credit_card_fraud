@@ -19,4 +19,4 @@ class DataTransformationConfig():
     '''
     This class defines the path to the preprocessor object.
     '''
-    preprocessor_obj_path:str = os.path.join('artifacts', 'preprocessor.pkl')
+    preprocessor_obj_path:str = os.path.join('artifacts', 'preprocessor.joblib')

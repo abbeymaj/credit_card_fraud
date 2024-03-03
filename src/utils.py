@@ -34,6 +34,33 @@ def read_file(file_path:str):
     
     except Exception as e:
         raise CustomException(e, sys)
+
+
+# Creating a function that returns the column names of a dataframe as a list
+def list_df_column_names(df_path:str):
+    '''
+    This function provides a list of the column names from a dataframe.
+    ============================================================================
+    -----------------
+    Parameters:
+    -----------------
+    df_path : dataframe - The path to the dataframe from which the column names 
+    will be listed.
+    
+    -----------------
+    Returns:
+    -----------------
+    col_list : list - This is a list of the dataframe column names.
+    ==============================================================================
+    '''
+    try:
+        df = pd.read_csv(df_path, compression='zip')
+        cols = list(df.columns)
+        col_list = [x for x in cols if x != 'Class']
+        return col_list
+    
+    except Exception as e:
+        raise CustomException(e, sys)
         
     
     
