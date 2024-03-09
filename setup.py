@@ -9,15 +9,18 @@ HYPHEN_E_DOT = '-e .'
 def get_requirements(filepath:str)->List[str]:
     '''
     This function fetches all packages from requirements.txt.
-    ==========================================================
+    ===============================================================================
+    ----------------
     Parameters:
-    - filepath -> This is the filepath of the requirements.txt file. 
+    ----------------
+    - filepath : str -> This is the filepath of the requirements.txt file. 
                   This must be a string.
     
+    ----------------
     Returns:
-    - List -> This is a list of the packages from the requirements.txt file.
-    
-    ===========================================================
+    ----------------
+    - List : str -> This is a list of the packages from the requirements.txt file.
+    =================================================================================
     '''
     requirements = []
     with open(filepath) as file_obj:

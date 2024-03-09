@@ -1,5 +1,7 @@
 # Importing packages
+import os
 import sys
+import dill
 import pandas as pd
 from zipfile import ZipFile
 from io import BytesIO
@@ -61,6 +63,37 @@ def list_df_column_names(df_path:str):
     
     except Exception as e:
         raise CustomException(e, sys)
+
+
+# Creating a function that saves an object to the given path
+def save_object(file_path:str, object):
+    '''
+    This function saves as object to the given file path.
+    ================================================================================
+    --------------------
+    Parameters:
+    --------------------
+    file_path : str - This is path to the folder in which the object will be saved.
+    object - This is the object, which will be saved.
+    
+    --------------------
+    Returns:
+    --------------------
+    Saves the object into folder given in the file path. 
+    =================================================================================
+    '''
+    try:
+        # Checking if the folder exists and if not a folder is created
+        dir_path = os.path.dirname(file_path)
+        os.makedirs(dir_path, exist_ok=True)
+        
+        # Saving the object using the given path
+        with open(file_path, 'wb') as file_obj:
+            dill.dump(object, file_obj)
+    
+    except Exception as e:
+        raise CustomException(e, sys)
+        
         
     
     
