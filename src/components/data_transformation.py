@@ -30,7 +30,7 @@ class DataTransformation():
             logging.info('Beginning the creation of the preprocessing object.')
             
             # Creating a list of dataframe columns
-            cols = list_df_column_names('artifacts\train.zip')
+            cols = list_df_column_names('artifacts/train.zip')
             
             # Creating the pipeline object
             model_pipeline = Pipeline(
