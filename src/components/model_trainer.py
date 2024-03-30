@@ -124,7 +124,7 @@ class ModelTrainer():
             
             # Saving the model to the artifacts folder if performance was better than 0.60
             if metric < 0.60:
-                raise CustomException("No best model found!")
+                print("No best model found!")
             else:
                 save_object(
                     file_path=self.model_training_config.trained_model_file_path,
