@@ -2,11 +2,17 @@
 import os
 import sys
 import dill
+import numpy as np
 import pandas as pd
 from zipfile import ZipFile
 from io import BytesIO
 import urllib.request as urllib2
 from src.exception import CustomException
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import StratifiedKFold
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import auc
+from sklearn.metrics import precision_recall_curve
 
 
 # Creating a function to read the zipfile on Gitlab
@@ -93,6 +99,128 @@ def save_object(file_path:str, object):
     
     except Exception as e:
         raise CustomException(e, sys)
+
+
+# Creating a function to load a pickle object
+def load_object(file_path:str):
+    '''
+    This function will load a pickle object.
+    ===================================================================================
+    ---------------------
+    Parameters:
+    ---------------------
+    file_path : str - This is the path where the object is stored.
+    
+    ---------------------
+    Returns:
+    ---------------------
+    The function returns the object after it is loaded.
+    ==================================================================================== 
+    '''
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return dill.load(file_obj)
+    
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+# Creating a function to load the training arrays and then combine them into a single array
+def create_train_set(train_path_1, train_path_2, train_path_3):
+    '''
+    This function takes the three training arrays as input and combines them into a single
+    train array.
+    =======================================================================================
+    ------------------
+    Parameters:
+    ------------------
+    train_path_1 : str - This is the path to the first training array.
+    train_path_2 : str - This is the path to the second training array.
+    train_path_3 : str - This is the path to the third training array.
+    
+    ------------------
+    Returns:
+    ------------------
+    combined_array : numpy array - This is the combined training dataset array.
+    ========================================================================================
+    '''
+    try:
+        # Loading the three training array paths
+        array_1 = np.load(train_path_1)
+        array_2 = np.load(train_path_2)
+        array_3 = np.load(train_path_3)
+        
+        # Combining the three training arrays into a single array.
+        combined_array = np.concatenate([array_1, array_2, array_3], axis=0)
+        
+        return combined_array   
+        
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+# Creating a function to find the best parameters for the model via Grid Search
+def find_best_model(X_train, y_train, estimator, params, cv):
+    '''
+    This function finds the best parameters for the model, given the parameters for
+    that model.
+    ================================================================================
+    -------------------
+    Parameters:
+    -------------------
+    X_train : numpy array or pandas dataframe - This is the training feature set.
+    y_train : numpy array or pandas dataframe - This is the training target set.
+    estimator : model object - This is the model that will be used.
+    params : dict - This is the parameters, which will be used for the grid search.
+    cv : model selection object - This is the cross validation object. 
+    
+    -------------------
+    Returns:
+    -------------------
+    best_model : model object - This is the model with the best parameters.
+    =================================================================================
+    '''
+    try:
+        gs = GridSearchCV(
+            estimator=estimator, 
+            param_grid=params, 
+            cv=cv, 
+            scoring='average_precision',
+            n_jobs=-1
+            )
+        gs.fit(X_train, y_train)
+        best_model = gs.best_estimator_
+        return best_model
+    
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+# Creating a function to measure the performance of the model
+def calculate_metrics(y_true, y_pred):
+    '''
+    This function calculates the precision recall under the curve. 
+    ===============================================================================================
+    --------------------
+    Parameters:
+    --------------------
+    y_true : numpy array or pandas dataframe - This is the labels from the validation or test set.
+    y_pred : numpy array or pandas dataframe - This is the predicted values.
+    
+    --------------------
+    Returns:
+    --------------------
+    prauc : float - This is the precision recall under the curve.
+    ===============================================================================================
+    '''
+    try:
+        precisions, recalls, threshold = precision_recall_curve(y_true, y_pred)
+        prauc = auc(recalls, precisions)
+        return prauc
+    
+    except Exception as e:
+        raise CustomException(e, sys)
+    
         
         
     

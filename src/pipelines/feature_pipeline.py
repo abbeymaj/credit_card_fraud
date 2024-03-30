@@ -1,13 +1,13 @@
 # Importing packages
-import sys
 from src.logger import logging
 from src.components.config_entity import DataIngestionConfig
-from src.exception import CustomException
 from src.components.data_transformation import DataTransformation
 from src.components.store_features import FeatureStoreCreation
 
 # Running the script
 if __name__ == '__main__':
+    logging.info("Creating the feature store.")
+    
     # Getting the train and test data paths
     data_path = DataIngestionConfig()
     train_path = data_path.train_data_path
@@ -20,6 +20,8 @@ if __name__ == '__main__':
     # Saving the transformed datasets into the feature store
     store = FeatureStoreCreation()
     store.create_feature_store(train_arr=train_arr, test_arr=test_arr)
+    
+    logging.info("Feature store created and data transformations completed.")
 
 
 

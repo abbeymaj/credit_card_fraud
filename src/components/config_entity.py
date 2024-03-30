@@ -32,3 +32,12 @@ class StoreFeatureConfig():
     xform_array_train2_path:str = os.path.join('feature_store', 'xform_array_train2.npy')
     xform_array_train3_path:str = os.path.join('feature_store', 'xform_array_train3.npy')
     xform_array_test_path:str = os.path.join('feature_store', 'xform_array_test.npy')
+
+
+# Creating a class for the model store configuration
+@dataclass
+class ModelTrainerConfig():
+    '''
+    The class defines the path to store and retrieve the trained model object. 
+    '''
+    trained_model_file_path:str = os.path.join('artifacts', 'model.pkl')
