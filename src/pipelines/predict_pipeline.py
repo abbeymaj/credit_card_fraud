@@ -46,8 +46,8 @@ class PredictPipeline():
             logging.info("Starting the prediction process.")
             
             # Loading the trained model and the preprocessing object
-            model = load_object(file_path=self.trained_model)
-            preprocessor = load_object(file_path=self.data_preprocessing)
+            model = load_object(file_path=self.trained_model.trained_model_file_path)
+            preprocessor = load_object(file_path=self.data_preprocessing.preprocessor_obj_path)
             
             # Transforming the input data using the preprocessor object
             scaled_data = preprocessor.transform(features)
