@@ -25,6 +25,10 @@ To install the project, use the following:
 **Language:** Python
 
 
+## Screenshot of the Prediction Page
+![Webpage Screenshot Link](## Link to Dataset on Kaggle)
+
+
 ## Link to Dataset on Kaggle
 
  - [Kaggle Credit Card Fraud Detection Dataset Link](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
