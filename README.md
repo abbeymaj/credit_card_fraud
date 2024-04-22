@@ -26,7 +26,7 @@ To install the project, use the following:
 
 
 ## Screenshot of the Prediction Page
-![Webpage Screenshot Link](## Link to Dataset on Kaggle)
+![Webpage Screenshot Link](https://github.com/abbeymaj80/my-ml-datasets/blob/master/webpage.jpg)
 
 
 ## Link to Dataset on Kaggle
